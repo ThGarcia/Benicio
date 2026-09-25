@@ -1,0 +1,875 @@
+/* ============================================================
+    1. VARIÁVEIS
+============================================================ */
+:root {
+    --bg-color: #FDFBF7;
+    --text-color: #2D2B2A;
+    --card-bg: #FFFFFF;
+
+    --primary: #FF5964;
+    --secondary: #35A7FF;
+
+    --accent-yellow: #FFE66D;
+    --accent-green: #38E54D;
+
+    --border-color: #2D2B2A;
+    --string-color: #E63946;
+    --shadow-color: rgba(45, 43, 42, 0.15);
+
+    --rotation-1: -2deg;
+    --rotation-2: 3deg;
+    --rotation-3: -1.5deg;
+
+    --bg-img:
+        linear-gradient(rgba(253, 251, 247, 0.5),
+            rgba(253, 251, 247, 0.5)),
+        url('./day.png');
+}
+
+[data-theme="dark"] {
+    --bg-color: #111116;
+    --text-color: #F4F4F6;
+    --card-bg: #1A1A24;
+
+    --primary: #FF7582;
+    --secondary: #00E5FF;
+
+    --accent-yellow: #FFEA79;
+    --accent-green: #39FF14;
+
+    --border-color: #00E5FF;
+    --shadow-color:
+        rgba(0, 229, 255, 0.2);
+
+    --bg-img:
+        linear-gradient(rgba(17, 17, 22, 0.85),
+            rgba(17, 17, 22, 0.85)),
+        url('./night.png');
+}
+
+/* ============================================================
+    2. RESET
+============================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition:
+        background-color 0.4s ease,
+        background-image 0.4s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+@font-face {
+    font-family: 'DuduCalligraphy';
+    src: url('./Dudu\ Calligraphy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: var(--bg-img);
+    color: var(--text-color);
+    font-family: 'DuduCalligraphy', sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+    padding-bottom: 80px;
+    background-size: 740px auto;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* ============================================================
+    3. HEADER
+============================================================ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color);
+    z-index: 100;
+    border-bottom: 2px dashed var(--border-color);
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.theme-toggle-btn {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    padding: 8px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--text-color);
+    box-shadow: 3px 3px 0px var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DuduCalligraphy', sans-serif;
+    text-transform: uppercase;
+}
+
+.theme-toggle-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--border-color);
+}
+
+/* ============================================================
+    4. HERO
+============================================================ */
+.hero {
+    position: relative;
+    padding: 60px 5% 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--primary);
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.photo-frame-main {
+    position: relative;
+    width: 280px;
+    height: 340px;
+    background: var(--card-bg);
+    border: 3px solid var(--border-color);
+    margin: 0 auto 50px;
+    padding: 15px 15px 50px 15px;
+    box-shadow: 8px 8px 0px var(--border-color);
+    transform: rotate(var(--rotation-1));
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border: 1px solid #CBD5E1;
+    object-fit: cover;
+}
+
+/* ============================================================
+    5. STICKERS
+============================================================ */
+.sticker {
+    position: absolute;
+    background: var(--accent-yellow);
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    border: 2px solid var(--border-color);
+    box-shadow: 3px 3px 0px var(--border-color);
+    white-space: nowrap;
+}
+
+.sticker-1 {
+    top: -15px;
+    left: -30px;
+    transform: rotate(-8deg);
+    background: var(--primary);
+    color: #fff;
+}
+
+.sticker-2 {
+    bottom: 15px;
+    right: -25px;
+    transform: rotate(12deg);
+    background: var(--accent-green);
+}
+
+.sticker-3 {
+    top: 40%;
+    right: -50px;
+    transform: rotate(-5deg);
+    background: var(--secondary);
+    color: #fff;
+}
+
+/* ============================================================
+    6. CAPÍTULOS
+============================================================ */
+.chapters-section {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 5%;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.chapter-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 0px var(--border-color);
+    position: relative;
+}
+
+.chapter-card:nth-child(even) {
+    transform: rotate(var(--rotation-2));
+}
+
+.chapter-card:nth-child(odd) {
+    transform: rotate(var(--rotation-3));
+}
+
+.chapter-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+.chapter-card h3 {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    text-transform: uppercase;
+}
+
+.chapter-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ============================================================
+    7. MURAL DE EVIDÊNCIAS
+============================================================ */
+.board-section {
+    max-width: 1080px;
+    min-height: 980px;
+    margin: auto;
+    border: 40px solid #5c3a21;
+    border-radius: 8px;
+}
+
+.detective-board {
+    position: relative;
+    max-width: 1000px;
+    min-height: 900px;
+    padding: 20px;
+    background-color: #d2a679;
+}
+
+.connections-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.connections-svg line {
+    stroke: var(--string-color);
+    stroke-width: 3;
+}
+
+/* ============================================================
+    8. POLAROIDS
+============================================================ */
+.polaroid-node {
+    position: absolute;
+    width: 220px;
+    background: #FFFFFF;
+    color: #111;
+    border: 2px solid var(--border-color);
+    padding: 12px 12px 25px;
+    box-shadow: 6px 8px 15px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.polaroid-node:hover {
+    z-index: 10;
+}
+
+.pin {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.polaroid-photo {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: top;
+    background: #E2E8F0;
+    border: 1px solid #CBD5E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.polaroid-photo:hover {
+    transform: scale(1.03);
+    filter: brightness(1.08);
+}
+
+.polaroid-caption {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.polaroid-date {
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: var(--accent-yellow);
+    padding: 2px 6px;
+    display: inline-block;
+    margin-bottom: 4px;
+    border: 1px solid #000;
+}
+
+/* Botão que abre o álbum */
+.album-button {
+    border: none;
+    background: transparent;
+    color: #111;
+    font-family: 'DuduCalligraphy', sans-serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.album-button:hover {
+    background: var(--accent-yellow);
+    transform: rotate(-2deg) scale(1.05);
+}
+
+/* ============================================================
+    9. POSIÇÕES DO MURAL
+============================================================ */
+#node-nascimento {
+    top: 40px;
+    left: 5%;
+    transform: rotate(-6deg);
+}
+
+#node-primeiro-sorriso {
+    top: 120px;
+    right: 10%;
+    transform: rotate(5deg);
+}
+
+#node-descoberta {
+    top: 380px;
+    left: 35%;
+    transform: rotate(-3deg);
+}
+
+#node-primeiros-passos {
+    top: 620px;
+    left: 8%;
+    transform: rotate(4deg);
+}
+
+#node-hoje {
+    top: 600px;
+    right: 8%;
+    transform: rotate(-7deg);
+}
+
+/* ============================================================
+    10. TIMELINE
+============================================================ */
+.timeline-section {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 5%;
+    position: relative;
+}
+
+.timeline-node {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    position: relative;
+}
+
+.timeline-node:nth-child(odd) {
+    justify-content: flex-start;
+}
+
+.timeline-node:nth-child(even) {
+    justify-content: flex-end;
+}
+
+.timeline-card {
+    width: 75%;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 6px 6px 0px var(--border-color);
+    position: relative;
+}
+
+.timeline-node:nth-child(odd) .timeline-card {
+    transform: rotate(-1deg);
+}
+
+.timeline-node:nth-child(even) .timeline-card {
+    transform: rotate(2deg);
+}
+
+.timeline-year {
+    display: inline-block;
+    background: var(--secondary);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.timeline-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.timeline-icon {
+    font-size: 2rem;
+    position: absolute;
+    top: -15px;
+    right: 15px;
+}
+
+/* ============================================================
+    11. JANELA DO ÁLBUM
+============================================================ */
+.album-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    z-index: 1000;
+    display: none;
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.album-modal.active {
+    display: block;
+}
+
+.album-container {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    background: var(--bg-color);
+    border: 4px solid var(--border-color);
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    position: relative;
+}
+
+.album-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.album-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.album-subtitle {
+    opacity: 0.7;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+.close-album-btn {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--border-color);
+}
+
+.close-album-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--border-color);
+}
+
+.album-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    border: 2px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-family: 'DuduCalligraphy', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--border-color);
+}
+
+/* ============================================================
+    12. GRADE DO ÁLBUM
+============================================================ */
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 25px;
+}
+
+.album-photo-card {
+    background: #fff;
+    padding: 10px 10px 18px;
+    border: 2px solid #222;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transform:rotate(var(--album-rotation));
+    transition:  transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.album-photo-card:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.album-photo-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    background: #E2E8F0;
+}
+
+.album-photo-caption {
+    color: #111;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    line-height: 1.1;
+}
+
+/* ============================================================
+    13. VISUALIZAÇÃO DA FOTO GRANDE
+============================================================ */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.94);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 80px;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border: 4px solid white;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 55px;
+    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* ============================================================
+    14. MOBILE
+============================================================ */
+@media (max-width: 768px) {
+    .board-section {
+        width: calc(100% - 20px);
+        min-height: auto;
+        margin: 40px auto;
+        border: 14px solid #5c3a21;
+    }
+
+    .detective-board {
+        width: 100%;
+        min-height: auto;
+        padding: 70px 20px 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 55px;
+        background-color: #d2a679;
+    }
+
+    .detective-board .section-title {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        margin-top: -45px !important;
+        margin-bottom: 10px;
+        font-size: 1.7rem;
+    }
+
+    .detective-board::before {
+        content: "";
+        position: absolute;
+        top: 90px;
+        bottom: 70px;
+        left: 50%;
+        width: 3px;
+        background: var(--string-color);
+        transform: translateX(-50%);
+        z-index: 0;
+    }
+
+    .connections-svg {
+        display: none;
+    }
+
+    .polaroid-node {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: min(280px, 90%);
+        z-index: 2;
+    }
+
+    #node-nascimento {
+        transform: rotate(-4deg);
+    }
+
+    #node-primeiro-sorriso {
+        transform: rotate(3deg);
+    }
+
+    #node-descoberta {
+        transform: rotate(-2deg);
+    }
+
+    #node-primeiros-passos {
+        transform: rotate(4deg);
+    }
+
+    #node-hoje {
+        transform: rotate(-3deg);
+    }
+
+    .polaroid-photo {
+        object-position: top;
+        height: 180px;
+    }
+
+    .pin {
+        width: 18px;
+        height: 18px;
+    }
+
+    .album-modal {
+        padding: 15px;
+    }
+
+    .album-container {
+        padding: 20px 15px;
+    }
+
+    .album-header {
+        align-items: flex-start;
+    }
+
+    .album-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .album-photo-card img {
+        height: 150px;
+    }
+
+    .lightbox {
+        padding: 60px 15px;
+    }
+
+    .lightbox-image {
+        max-width: 95vw;
+        max-height: 80vh;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+
+    .lightbox-prev {
+        left: 8px;
+    }
+
+    .lightbox-next {
+        right: 8px;
+    }
+}
+
+@media (max-width: 767px) {
+    #themeText {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .photo-frame-main {
+        width: 220px;
+        height: 280px;
+    }
+
+    .sticker-3 {
+        right: -10px;
+    }
+
+    .timeline-card {
+        width: 100%;
+    }
+
+    .timeline-node {
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .album-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .album-photo-card img {
+        height: 240px;
+    }
+}
