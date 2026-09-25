@@ -303,10 +303,16 @@ function abrirLightbox(index) {
 ========================================================= */
 function atualizarLightbox() {
     const album = albuns[albumAtual];
-
     const foto = album.fotos[fotoAtual];
 
-    lightboxImage.src = foto.src;
+    let imagemGrande = foto.src;
+
+    if (imagemGrande.includes('drive.google.com/thumbnail')) {
+        const id = new URL(imagemGrande).searchParams.get('id');
+        imagemGrande = `https://drive.google.com/thumbnail?id=${id}&sz=w2000`;
+    }
+
+    lightboxImage.src = imagemGrande;
     lightboxImage.alt = foto.legenda;
     lightboxCaption.textContent = foto.legenda;
 }
